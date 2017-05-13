@@ -1,5 +1,5 @@
 
-var Router = require('../router'),
+var Router = require('../breogan'),
     assert = require('assert');
 
 var router = new Router;

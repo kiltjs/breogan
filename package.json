@@ -1,17 +1,31 @@
 {
-  "name": "router",
-  "version": "1.0.0",
-  "description": "",
-  "main": "router.js",
+  "name": "breogan",
+  "version": "0.0.1",
+  "description": "Router resolver for browser and Node.js",
+  "main": "breogan.js",
   "directories": {
     "test": "tests"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Jesús Germade <jesus@germade.es>",
-  "license": "ISC",
+  "dependencies": {},
   "devDependencies": {
     "mocha": "^3.3.0"
-  }
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kiltjs/breogan.git"
+  },
+  "keywords": [
+    "router",
+    "browser",
+    "node"
+  ],
+  "author": "Jesús Germade <jesus@germade.es>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kiltjs/breogan/issues"
+  },
+  "homepage": "https://github.com/kiltjs/breogan#readme"
 }
