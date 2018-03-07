@@ -1,4 +1,4 @@
-# breogan
+# breogan [work in progress]
 
 Router resolver for browser and Node.js
 
