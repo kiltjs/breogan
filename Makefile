@@ -1,3 +1,3 @@
 
 test:
-	$(shell npm bin)/mocha tests
+	$(shell npm bin)/mocha tests/*-tests.js
