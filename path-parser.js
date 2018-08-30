@@ -1,5 +1,6 @@
 
 function parsePath (path) {
+  console.log('parsePath', path);
   var result = { head_slash: false, tail_slash: false };
 
   if( typeof path !== 'string' ) throw new TypeError('path should be a String, received: ' + typeof path);
@@ -13,6 +14,28 @@ function parsePath (path) {
   }).split('/');
 
   result.levels = result.paths.length;
+
+  result.matches = result.paths.map(function (slug) {
+    if( /^:/.test(slug) ) return {
+      RE: /^([a-zA-Z][a-zA-Z0-9_]*?)$/,
+      vars: [slug.substr(1)],
+    };
+
+    if( /\(:.+?\)/.test(slug) ) return (function (slug) {
+      var vars = [],
+          RE_parts = slug.split(/(\(:\w+?\))/g).map(function (re_part, i) {
+            if( i%2 ) {
+              vars.push( re_part.substr(2, re_part.length - 3) );
+              return '([a-zA-Z][a-zA-Z0-9_]*?)';
+            } else return re_part;
+          });
+
+      return { vars: vars, RE: new RegExp('^' + RE_parts.join('') + '$') };
+
+    })(slug);
+
+    return slug;
+  });
 
   return result;
 }

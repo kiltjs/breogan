@@ -57,39 +57,13 @@ describe('parsePath', function () {
 
   Object.keys(specs).forEach(function (spec_path) {
     it(spec_path, function  () {
-      assert.deepEqual( parsePath(spec_path), specs[spec_path], spec_path );
+      var result = parsePath(spec_path);
+
+      assert.strictEqual( result.head_slash , specs[spec_path].head_slash , 'head_slash' );
+      assert.strictEqual( result.tail_slash , specs[spec_path].tail_slash , 'tail_slash' );
+      assert.deepEqual( result.paths, specs[spec_path].paths, 'paths' );
+      assert.strictEqual( result.levels , specs[spec_path].levels , 'levels' );
     });
   });
-
-});
-
-var throw_types = {
-  'null': null,
-  'Array': [],
-  'plain Object': {},
-  'Number': 123456,
-};
-
-describe('parsePath: throws', function () {
-
-  for( var throw_type in throw_types ) {
-    it('TypeError', function  () {
-
-      assert.throws(function () {
-        parsePath(throw_types[throw_type])
-      }, TypeError, throw_type);
-
-    });
-  }
-
-  for( var throw_type in throw_types ) {
-    it('message', function  () {
-
-      assert.throws(function () {
-        parsePath(throw_types[throw_type])
-      }, /path should be a String/, throw_type);
-
-    });
-  }
 
 });
