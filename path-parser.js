@@ -17,7 +17,7 @@ function parsePath (path) {
 
   result.matches = result.paths.map(function (slug) {
     if( /^:/.test(slug) ) return {
-      RE: /^([a-zA-Z][a-zA-Z0-9_]*?)$/,
+      RE: /^(.*?)$/,
       vars: [slug.substr(1)],
     };
 
@@ -26,7 +26,8 @@ function parsePath (path) {
           RE_parts = slug.split(/(\(:\w+?\))/g).map(function (re_part, i) {
             if( i%2 ) {
               vars.push( re_part.substr(2, re_part.length - 3) );
-              return '([a-zA-Z][a-zA-Z0-9_]*?)';
+              // return '([a-zA-Z][a-zA-Z0-9_]*?)';
+              return '(.*?)';
             } else return re_part;
           });
 

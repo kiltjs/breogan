@@ -32,11 +32,11 @@ var specs = {
     vars: [null, null, null],
   },
   '/foo/:foo/bar': {
-    as_string: ['foo', '^([a-zA-Z][a-zA-Z0-9_]*?)$', 'bar'],
+    as_string: ['foo', '^(.*?)$', 'bar'],
     vars: [null, ['foo'], null],
   },
   '/foo/id-(:foo)/bar': {
-    as_string: ['foo', '^id-([a-zA-Z][a-zA-Z0-9_]*?)$', 'bar'],
+    as_string: ['foo', '^id-(.*?)$', 'bar'],
     vars: [null, ['foo'], null],
   },
 };
