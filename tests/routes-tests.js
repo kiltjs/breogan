@@ -1,31 +1,32 @@
+/* global describe it */
 
-var Router = require('../breogan'),
-    assert = require('assert');
+import Router from '../src/breogan'
+import assert from 'assert'
 
-var router = new Router;
+var router = new Router
 
 describe('Router', function () {
 
   it('.path', function  () {
 
-    var ids = [];
+    var ids = []
 
     router.route('/foo/:fooId', function (id) {
-      ids.push(id);
-    });
+      ids.push(id)
+    })
 
-    router.run('/foo/foo');
-    router.run('/foo/bar');
+    router.run('/foo/foo')
+    router.run('/foo/bar')
 
     try{
-      router.run('/foo/bar/excluded');
+      router.run('/foo/bar/excluded')
     } catch(err) {
-      assert.strictEqual( err.route, '/foo/bar/excluded' );
-      assert.strictEqual( err.missing, true );
+      assert.strictEqual( err.route, '/foo/bar/excluded' )
+      assert.strictEqual( err.missing, true )
     }
 
-    assert.strictEqual( ids.join(', '), 'foo, bar' );
+    assert.strictEqual( ids.join(', '), 'foo, bar' )
 
-  });
+  })
 
-});
+})

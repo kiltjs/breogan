@@ -6,8 +6,13 @@
   "directories": {
     "test": "tests"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/register": "^7.4.4"
+  },
   "devDependencies": {
+    "eslint": "^5.16.0",
     "mocha": "^3.3.0"
   },
   "scripts": {
