@@ -6,12 +6,12 @@ import assert from 'assert'
 function _cleanAST (ast) {
   ast.forEach(function (entry) {
     delete entry.test
-    if( entry.paths && !entry.paths.length ) delete entry.paths
+    if( entry._ && !entry._.length ) delete entry._
     if( entry.listeners && !entry.listeners.length ) delete entry.listeners
     if( entry.listeners ) entry.listeners.forEach(function (listener) {
       delete listener.route_params
     })
-    if( entry.paths ) _cleanAST(entry.paths)
+    if( entry._ ) _cleanAST(entry._)
   })
   return ast
 }
@@ -38,7 +38,7 @@ describe('path-ast: addRoute', function () {
       ],
       [
         {
-          str: 'foo',
+          slug: 'foo',
           listeners: [
             {
               run: 'runFoo',
@@ -54,10 +54,10 @@ describe('path-ast: addRoute', function () {
       ],
       [
         {
-          str: 'foo',
-          paths: [
+          slug: 'foo',
+          _: [
             {
-              str: 'bar',
+              slug: 'bar',
               listeners: [
                 {
                   run: 'runFooBar',
@@ -76,15 +76,15 @@ describe('path-ast: addRoute', function () {
       ],
       [
         {
-          str: 'foo',
+          slug: 'foo',
           listeners: [
             {
               run: 'runFoo',
             }
           ],
-          paths: [
+          _: [
             {
-              str: 'bar',
+              slug: 'bar',
               listeners: [
                 {
                   run: 'runFooBar',
@@ -103,15 +103,15 @@ describe('path-ast: addRoute', function () {
       ],
       [
         {
-          str: 'foo',
+          slug: 'foo',
           listeners: [
             {
               run: 'runFoo',
             }
           ],
-          paths: [
+          _: [
             {
-              str: '^(.*?)$',
+              slug: '^(.*?)$',
               listeners: [
                 {
                   run: 'runFooBar',
