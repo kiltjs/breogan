@@ -4,15 +4,20 @@ import {addRoute} from '../src/path-ast'
 import assert from 'assert'
 
 function _cleanAST (ast) {
-  ast.forEach(function (entry) {
+  var entry
+
+  for( var _slug in ast ) {
+    entry = ast[_slug]
+
     delete entry.test
-    if( entry._ && !entry._.length ) delete entry._
+    if( entry._ && !Object.keys(entry._).length ) delete entry._
     if( entry.listeners && !entry.listeners.length ) delete entry.listeners
     if( entry.listeners ) entry.listeners.forEach(function (listener) {
       delete listener.route_params
     })
     if( entry._ ) _cleanAST(entry._)
-  })
+  }
+
   return ast
 }
 
@@ -22,7 +27,7 @@ describe('path-ast: addRoute', function () {
 
     it( routes.map( (route) => route.path ).join(', '), function () {
 
-      var paths = []
+      var paths = {}
       routes.forEach( (route) => addRoute(paths, route.path, route.listener) )
 
       assert.deepEqual( _cleanAST(paths), route_paths )
@@ -36,37 +41,34 @@ describe('path-ast: addRoute', function () {
       [
         { path: 'foo', listener: 'runFoo' },
       ],
-      [
-        {
-          slug: 'foo',
+      {
+        'foo': {
           listeners: [
             {
               run: 'runFoo',
             }
           ]
         }
-      ]
+      }
     ],
 
     [
       [
         { path: 'foo/bar', listener: 'runFooBar' },
       ],
-      [
-        {
-          slug: 'foo',
-          _: [
-            {
-              slug: 'bar',
+      {
+        'foo': {
+          _: {
+            'bar': {
               listeners: [
                 {
                   run: 'runFooBar',
                 }
               ]
-            }
-          ]
+            },
+          },
         }
-      ]
+      }
     ],
 
     [
@@ -74,26 +76,24 @@ describe('path-ast: addRoute', function () {
         { path: 'foo', listener: 'runFoo' },
         { path: 'foo/bar', listener: 'runFooBar' },
       ],
-      [
-        {
-          slug: 'foo',
+      {
+        'foo': {
           listeners: [
             {
               run: 'runFoo',
             }
           ],
-          _: [
-            {
-              slug: 'bar',
+          _: {
+            'bar': {
               listeners: [
                 {
                   run: 'runFooBar',
                 }
               ]
-            }
-          ]
+            },
+          }
         }
-      ]
+      }
     ],
 
     [

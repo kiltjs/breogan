@@ -9,7 +9,7 @@ describe('path-ast: processRoute', function () {
 
     it( route_path + ', ' + path, function () {
 
-      var paths = [],
+      var paths = {},
           is_processed = false
       
       addRoute(paths, route_path, function (params) {
