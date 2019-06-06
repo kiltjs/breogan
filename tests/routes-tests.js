@@ -11,8 +11,8 @@ describe('Router', function () {
 
     var ids = []
 
-    router.route('/foo/:fooId', function (id) {
-      ids.push(id)
+    router.route('/foo/:foo_id', function (params) {
+      ids.push(params.foo_id)
     })
 
     router.run('/foo/foo')
